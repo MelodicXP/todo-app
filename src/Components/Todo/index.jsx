@@ -14,8 +14,10 @@ const Todo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   
+  // Handles all form input logic
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
+  // Add item and update list state
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
@@ -23,11 +25,13 @@ const Todo = () => {
     setList([...list, item]);
   }
 
+  // Delete item and udpate list state
   function deleteItem(id) {
     const items = list.filter( item => item.id !== id );
     setList(items);
   }
 
+  // Toggle completed status
   function toggleComplete(id) {
 
     const items = list.map( item => {
@@ -41,10 +45,11 @@ const Todo = () => {
 
   }
 
+  // Keep an eye on when list is updated and update count of incomplete
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
+    // document.title = `To Do List: ${incomplete}`;
     // linter will want 'incomplete' added to dependency array unnecessarily. 
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
