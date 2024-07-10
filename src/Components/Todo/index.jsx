@@ -66,6 +66,7 @@ const Todo = () => {
       <List 
         list={list}
         toggleComplete={toggleComplete}
+        deleteItem={deleteItem}
       />
     </>
   );
