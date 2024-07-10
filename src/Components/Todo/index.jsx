@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
 import Header from '../Header';
 import List from '../List';
+import Form from '../Form';
 
 import { v4 as uuid } from 'uuid';
 
@@ -51,31 +52,13 @@ const Todo = () => {
   return (
     <>
       <Header incomplete={incomplete}/>
+
+      <Form 
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        defaultValues={defaultValues.difficulty}
+      />
      
-      <form onSubmit={handleSubmit}>
-
-        <h2>Add To Do Item</h2>
-
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
-
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
-
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
-
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
       <List 
         list={list}
         toggleComplete={toggleComplete}
