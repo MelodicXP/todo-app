@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
+import Header from '../Header';
+import List from '../List';
 
 import { v4 as uuid } from 'uuid';
 
@@ -19,10 +21,10 @@ const Todo = () => {
     setList([...list, item]);
   }
 
-  function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
-    setList(items);
-  }
+  // function deleteItem(id) {
+  //   const items = list.filter( item => item.id !== id );
+  //   setList(items);
+  // }
 
   function toggleComplete(id) {
 
@@ -48,10 +50,8 @@ const Todo = () => {
 
   return (
     <>
-      <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
-      </header>
-
+      <Header incomplete={incomplete}/>
+     
       <form onSubmit={handleSubmit}>
 
         <h2>Add To Do Item</h2>
@@ -76,16 +76,10 @@ const Todo = () => {
         </label>
       </form>
 
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
-
+      <List 
+        list={list}
+        toggleComplete={toggleComplete}
+      />
     </>
   );
 };
