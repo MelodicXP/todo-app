@@ -9,10 +9,10 @@ const DisplaySettingsProvider = (props) => {
 
   // Default settings
   const [displayItems] = useState(3); // Default to display three items
-  const [hideComplete, setHideComplete] = useState(false); // Default to hide completed items
+  const [hideCompleted, setHideCompleted] = useState(false); // Default to hide completed items
 
   return (
-    <SettingsContext.Provider value={{ displayItems, hideComplete, setHideComplete }}>
+    <SettingsContext.Provider value={{ displayItems, hideCompleted, setHideCompleted }}>
       {props.children}
     </SettingsContext.Provider>
   );

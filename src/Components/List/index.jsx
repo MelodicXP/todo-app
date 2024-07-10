@@ -1,14 +1,18 @@
-// Import context
-import { useContext } from 'react'; 
+import { useContext, useState } from 'react';
 import { SettingsContext } from '../../Context/Settings';
+import { Pagination } from '@mantine/core';
 
 const List = (props) => {
   const { list, toggleComplete, deleteItem } = props;
   const { displayItems, hideCompleted } = useContext(SettingsContext);
+  const [activePage, setActivePage] = useState(1); // State to manage active page
 
+  // Filter and slice the list based on settings and pagination
   const filteredList = hideCompleted ? list.filter(item => !item.complete) : list;
-  const displayList = filteredList.slice(0, displayItems);
-  
+  const totalItems = filteredList.length;
+  const startIndex = (activePage - 1) * displayItems;
+  const displayList = filteredList.slice(startIndex, startIndex + displayItems);
+
   return (
     <>
       {displayList.map(item => (
@@ -21,6 +25,11 @@ const List = (props) => {
           <hr />
         </div>
       ))}
+      <Pagination
+        page={activePage}
+        onChange={setActivePage}
+        total={Math.ceil(totalItems / displayItems)}
+      />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { MantineProvider } from '@mantine/core'; // Import MantineProvider
 import Todo from './Components/Todo';
 import Footer from './Components/Footer';
 
@@ -10,13 +10,15 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <DisplaySettingsProvider>
-          {/* <header>
-            <h1 Home </h1>
-          </header> */}
-          <Todo />
-          <Footer />
-        </DisplaySettingsProvider>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <DisplaySettingsProvider>
+            {/* <header>
+              <h1 Home </h1>
+            </header> */}
+            <Todo />
+            <Footer />
+          </DisplaySettingsProvider>
+        </MantineProvider>
       </React.Fragment>
     );
   }
