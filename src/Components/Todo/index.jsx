@@ -13,7 +13,11 @@ const Todo = () => {
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
-  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  
+  const { handleChange, handleSubmit } = useForm(
+    { addItem, deleteItem },
+    defaultValues
+  );
 
   function addItem(item) {
     item.id = uuid();
@@ -22,10 +26,10 @@ const Todo = () => {
     setList([...list, item]);
   }
 
-  // function deleteItem(id) {
-  //   const items = list.filter( item => item.id !== id );
-  //   setList(items);
-  // }
+  function deleteItem(id) {
+    const items = list.filter( item => item.id !== id );
+    setList(items);
+  }
 
   function toggleComplete(id) {
 
@@ -54,7 +58,7 @@ const Todo = () => {
       <Header incomplete={incomplete}/>
 
       <Form 
-        handleSubmit={handleSubmit}
+        handleSubmit={(e) => handleSubmit(e, 'addItem')}
         handleChange={handleChange}
         defaultValues={defaultValues.difficulty}
       />
