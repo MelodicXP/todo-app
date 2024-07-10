@@ -14,10 +14,7 @@ const Todo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   
-  const { handleChange, handleSubmit } = useForm(
-    { addItem, deleteItem },
-    defaultValues
-  );
+  const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   function addItem(item) {
     item.id = uuid();
@@ -58,7 +55,7 @@ const Todo = () => {
       <Header incomplete={incomplete}/>
 
       <Form 
-        handleSubmit={(e) => handleSubmit(e, 'addItem')}
+        handleSubmit={handleSubmit}
         handleChange={handleChange}
         defaultValues={defaultValues.difficulty}
       />
