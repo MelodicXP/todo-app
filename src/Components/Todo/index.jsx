@@ -4,9 +4,6 @@ import Header from '../Header';
 import List from '../List';
 import Form from '../Form';
 
-// Import display settings provider
-import DisplaySettingsProvider from '../../Context/Settings';
-
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
@@ -59,7 +56,8 @@ const Todo = () => {
   }, [list]);  
 
   return (
-    <DisplaySettingsProvider>
+    <>
+
       <Header incomplete={incomplete} />
 
       <Form
@@ -73,7 +71,8 @@ const Todo = () => {
         toggleComplete={toggleComplete}
         deleteItem={deleteItem}
       />
-    </DisplaySettingsProvider>
+
+    </>
   );
 };
 
