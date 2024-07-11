@@ -33,16 +33,13 @@ const Todo = () => {
 
   // Toggle completed status
   function toggleComplete(id) {
-
-    const items = list.map( item => {
-      if ( item.id === id ) {
-        item.complete = ! item.complete;
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
       }
       return item;
     });
-
     setList(items);
-
   }
 
   // Keep an eye on when list is updated and update count of incomplete
