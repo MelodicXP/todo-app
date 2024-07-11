@@ -3,6 +3,7 @@ import useForm from '../../hooks/form';
 import Header from '../Header';
 import List from '../List';
 import Form from '../Form';
+import './Todo.scss';
 
 import { v4 as uuid } from 'uuid';
 
@@ -57,17 +58,19 @@ const Todo = () => {
 
       <Header incomplete={incomplete} />
 
-      <Form
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        defaultValues={defaultValues.difficulty}
-      />
+      <div className='form-list-display'>
+        <Form
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          defaultValues={defaultValues.difficulty}
+        />
 
-      <List
-        list={list}
-        toggleComplete={toggleComplete}
-        deleteItem={deleteItem}
-      />
+        <List
+          list={list}
+          toggleComplete={toggleComplete}
+          deleteItem={deleteItem}
+        />
+      </div>
 
     </>
   );

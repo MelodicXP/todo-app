@@ -1,8 +1,10 @@
+import './Form.scss'
+
 const Form = (props) => {
 
   const { handleSubmit, handleChange, defaultValues } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
 
       <h2>Add To Do Item</h2>
 
@@ -22,7 +24,7 @@ const Form = (props) => {
       </label>
 
       <label>
-        <button type="submit">Add Item</button>
+        <button id='add-item-button' type="submit">Add Item</button>
       </label>
     </form>
   )

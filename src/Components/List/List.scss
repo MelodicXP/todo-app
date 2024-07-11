@@ -1,0 +1,32 @@
+// Define your custom colors
+$nav-link-bg: #339af8;
+$nav-link-color: white;
+$nav-link-hover-bg: #adb5bd;
+
+.list {
+  // border: 2px solid black;
+  width: 100%;
+  margin-right: 0.5rem;
+  margin-left: 1rem;
+}
+.list-item {
+  margin-bottom: 1rem;
+  border: 1px solid #adb5bd;
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px #adb5bd
+}
+
+#delete-button {
+  margin-top: 1rem;
+  border: none;
+  background-color: #f03e3e;
+  color: white;
+
+  &:hover {
+    background-color: #1e7acb; // Darker shade of blue for hover effect
+    cursor: pointer; // Optional: Changes cursor to pointer to indicate it's clickable
+    color: white;
+  }
+}
+
+
