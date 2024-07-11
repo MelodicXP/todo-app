@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import { Pagination } from '@mantine/core';
 
@@ -7,8 +7,15 @@ const List = (props) => {
   const { displayItems, hideCompleted } = useContext(SettingsContext);
   const [activePage, setActivePage] = useState(1); // State to manage active page
 
+  // UseEffect to handle filtering logic whenever list or hideCompleted changes
+  const [filteredList, setFilteredList] = useState([]);
+
+  // Ensure list is filtered whenever list or hideCompleted changes
+  useEffect(() => {
+    setFilteredList(hideCompleted ? list.filter(item => !item.complete) : list); 
+  }, [list, hideCompleted]);
+
   // Filter and slice the list based on settings and pagination
-  const filteredList = hideCompleted ? list.filter(item => !item.complete) : list;
   const totalItems = filteredList.length;
   const startIndex = (activePage - 1) * displayItems;
   const displayList = filteredList.slice(startIndex, startIndex + displayItems);
