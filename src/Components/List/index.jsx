@@ -11,10 +11,17 @@ const List = (props) => {
   // UseEffect to handle filtering logic whenever list or hideCompleted changes
   const [filteredList, setFilteredList] = useState([]);
 
-  // Ensure list is filtered whenever list or hideCompleted changes
   useEffect(() => {
     setFilteredList(hideCompleted ? list.filter(item => !item.complete) : list); 
   }, [list, hideCompleted]);
+
+  // Adjust active page if current page becomes empty after deletion
+  useEffect(() => {
+    const totalPages = Math.ceil(filteredList.length / displayItems);
+    if (activePage > totalPages) {
+      setActivePage(totalPages > 0 ? totalPages : 1);
+    }
+  }, [filteredList, displayItems, activePage]);
 
   // Filter and slice the list based on settings and pagination
   const totalItems = filteredList.length;
