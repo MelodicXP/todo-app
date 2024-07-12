@@ -31,12 +31,12 @@ const List = (props) => {
   return (
     <div className='list'>
       {displayList.map(item => (
-        <div key={item.id} className='list-item'>
+        <div key={item.id} className='list-item' data-testid="list-item">
           <p>{item.text}</p>
           <p><small>Assigned to: {item.assignee}</small></p>
           <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <button id='delete-button' type="button" onClick={() => deleteItem(item.id)}>Delete</button>
+          <div onClick={() => toggleComplete(item.id)} data-testid="complete-button">Complete: {item.complete.toString()}</div>
+          <button id='delete-button' type="button" onClick={() => deleteItem(item.id)} data-testid="delete-button">Delete</button>
         </div>
       ))}
       <Pagination

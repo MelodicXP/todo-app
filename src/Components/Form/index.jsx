@@ -10,21 +10,21 @@ const Form = (props) => {
 
       <label>
         <span>To Do Item</span>
-        <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
+        <input onChange={handleChange} name="text" type="text" placeholder="Item Details" data-testid="item-details-input"/>
       </label>
 
       <label>
         <span>Assigned To</span>
-        <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
+        <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" data-testid="assigned-to-input"/>
       </label>
 
       <label>
         <span>Difficulty</span>
-        <input onChange={handleChange} defaultValue={defaultValues} type="range" min={1} max={5} name="difficulty" />
+        <input onChange={handleChange} defaultValue={defaultValues} type="range" min={1} max={5} name="difficulty" data-testid="difficulty"/>
       </label>
 
       <label>
-        <button id='add-item-button' type="submit">Add Item</button>
+        <button id='add-item-button' type="submit" data-testid="add-item-button">Add Item</button>
       </label>
     </form>
   )
