@@ -1,0 +1,15 @@
+// Define your custom colors
+$nav-link-bg: #339af8;
+$nav-link-color: white;
+$nav-link-hover-bg: #adb5bd;
+
+.form-list-display{
+  display: flex;
+  flex-direction: row;
+  // border: 3px solid green;
+  justify-content:flex-start;
+  width: 50vw;
+  margin: auto;
+}
+
+

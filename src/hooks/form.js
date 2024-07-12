@@ -4,11 +4,13 @@ const useForm = (callback, defaultValues={}) => {
 
   const [values, setValues] = useState({});
 
+  // Handle button submission of form 'addItem'
   const handleSubmit = (event) => {
     event.preventDefault();
-    callback({...values});
+    callback({ ...values });
   };
 
+  // Handles form field changes and update state
   const handleChange = (event) => {
     let name, value;
     if(typeof(event) === 'object'){
@@ -30,6 +32,7 @@ const useForm = (callback, defaultValues={}) => {
     setValues(values => ({ ...values, [name]: value }));
   };
 
+  // Sets the initial values when component mounts
   useEffect( () => {
     setValues( defaultValues );
   }, [defaultValues]);
