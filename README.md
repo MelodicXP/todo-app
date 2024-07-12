@@ -141,8 +141,7 @@ Currently, two official plugins are available:
 
 ### Testing
 
-* App.jsx testing to assert CRUD method functionality
-* Form.jsx testing to assert request info capture
-* msw (mock server) used for testing
+* App.jsx testing to assert adding, deleting, and completing items
+* Settings.jsx testing to assert context consumed by child components.
 
 ### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/1)
