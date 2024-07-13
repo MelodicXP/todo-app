@@ -1,32 +1,48 @@
-import './Form.scss'
+import './Form.scss';
+import { Fieldset, TextInput, Button, Group} from '@mantine/core';
+import { Slider, Text } from '@mantine/core';
 
 const Form = (props) => {
 
   const { handleSubmit, handleChange, defaultValues } = props;
   return (
-    <form className='form' onSubmit={handleSubmit}>
+    <Fieldset component="form" onSubmit={handleSubmit} legend="Add To Do Item">
 
-      <h2>Add To Do Item</h2>
+      <TextInput
+        data-testid="item-details-input" 
+        label="To Do Item" 
+        placeholder="Item Details" 
+        onChange={handleChange} 
+        name="text"  
+        required  
+      />
 
-      <label>
-        <span>To Do Item</span>
-        <input onChange={handleChange} name="text" type="text" placeholder="Item Details" data-testid="item-details-input"/>
-      </label>
+      <TextInput 
+        data-testid="assigned-to-input"
+        label="Assigned To" 
+        placeholder="Assignee Name" 
+        onChange={handleChange} 
+        name="assignee" 
+        mt="md" 
+        required
+      />
 
-      <label>
-        <span>Assigned To</span>
-        <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" data-testid="assigned-to-input"/>
-      </label>
+      <Text size="md" mt="xl">Difficulty</Text>
+      <Slider 
+        defaultValue={defaultValues} 
+        min={1} 
+        max={5} step={1} 
+        onChange={handleChange} 
+        name="difficulty" 
+        data-testid="difficulty" 
+        mt="sm"
+      />
 
-      <label>
-        <span>Difficulty</span>
-        <input onChange={handleChange} defaultValue={defaultValues} type="range" min={1} max={5} name="difficulty" data-testid="difficulty"/>
-      </label>
+      <Group>
+        <Button fullWidth mt="md" id='add-item-button' type="submit" data-testid="add-item-button">Add Item</Button>
+      </Group>
 
-      <label>
-        <button id='add-item-button' type="submit" data-testid="add-item-button">Add Item</button>
-      </label>
-    </form>
+    </Fieldset>
   )
 }
 
