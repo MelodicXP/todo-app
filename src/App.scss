@@ -1,8 +1,4 @@
 // Define your custom colors
-$nav-link-bg: #339af8;
-$nav-link-color: white;
-$nav-link-hover-bg: #adb5bd;
-
 body {
   width: 70vw;
   margin: auto;
@@ -11,15 +7,12 @@ body {
 
 .nav-link {
   display: flex;
-  background-color: #{$nav-link-bg};
-  color: #{$nav-link-color};
-  text-decoration: none;
   margin: 0px;
   padding-left: 1rem;
   padding-top: 1rem;
-  padding-bottom: 1rem;
-  :hover {
-    background-color: #{$nav-link-hover-bg};
-  } 
-  
+  padding-bottom: 1rem;  
+}
+
+.mantine-NavLink-label {
+  font-size: larger;
 }
