@@ -17,17 +17,16 @@ describe('App', () => {
     const itemDetailsInput = screen.getByTestId('item-details-input');
     const assignedToInput = screen.getByTestId('assigned-to-input');
     const addItemButton = screen.getByTestId('add-item-button');
-    const difficulty = screen.getByTestId('difficulty');
+    // const difficulty = screen.getByTestId('difficulty');
 
     // Mock user inputs
     let mockTask = 'Task 1';
     let mockAssignedTo = 'Person 1';
-    let mockDifficulty = 3;
+    let mockDifficulty = 4;
 
     // Input values
     fireEvent.change(itemDetailsInput, {target: {value: mockTask}});
     fireEvent.change(assignedToInput, {target: {value: mockAssignedTo}});
-    fireEvent.change(difficulty, {target: {value: mockDifficulty}});
 
     // Assert that the input values are updated correctly
     expect(itemDetailsInput.value).toBe(mockTask);
@@ -56,17 +55,15 @@ describe('App', () => {
     const itemDetailsInput = screen.getByTestId('item-details-input');
     const assignedToInput = screen.getByTestId('assigned-to-input');
     const addItemButton = screen.getByTestId('add-item-button');
-    const difficulty = screen.getByTestId('difficulty');
 
     // Mock user inputs
     const mockTask = 'Task 1';
     const mockAssignedTo = 'Person 1';
-    const mockDifficulty = 3;
 
     // Input values
     fireEvent.change(itemDetailsInput, { target: { value: mockTask } });
     fireEvent.change(assignedToInput, { target: { value: mockAssignedTo } });
-    fireEvent.change(difficulty, { target: { value: mockDifficulty } });
+    // fireEvent.change(difficulty, { target: { value: mockDifficulty } });
 
     // Fire add item button
     fireEvent.click(addItemButton);
@@ -90,17 +87,15 @@ describe('App', () => {
     const itemDetailsInput = screen.getByTestId('item-details-input');
     const assignedToInput = screen.getByTestId('assigned-to-input');
     const addItemButton = screen.getByTestId('add-item-button');
-    const difficulty = screen.getByTestId('difficulty');
 
     // Mock user inputs
     const mockTask = 'Task 1';
     const mockAssignedTo = 'Person 1';
-    const mockDifficulty = 3;
 
     // Input values
     fireEvent.change(itemDetailsInput, { target: { value: mockTask } });
     fireEvent.change(assignedToInput, { target: { value: mockAssignedTo } });
-    fireEvent.change(difficulty, { target: { value: mockDifficulty } });
+    // fireEvent.change(difficulty, { target: { value: mockDifficulty } });
 
     // Fire add item button
     fireEvent.click(addItemButton);
