@@ -6,41 +6,43 @@
 
 ### Problem Domain
 
-Phase 1, perform some refactoring of a Todo application built by another team. This application mixes application state and user settings at the top level and passes things around.
+Phase 2: Incorporate configuration settings to the application. Extend the functionality of application by allowing user to make some decisions on how they would like application to function. Specifically, allow user to make changes to '2' settings.
 
 ### Feature Tasks & Requirements
 
-* Create a Detailed UML.
-* Properly modularize the application into separate components, note the proposed file structure below.
-* Implement the Context API to make some basic application settings available to components.
-  * Show three incomplete todo tasks/items by default.
-  * Hide completed items by default.
-  * Add the sort word ‘difficulty’ by default.
-  * View additional incomplete tasks by using pagination
-* Style the application using the Mantine Component API{target:_blank}.
-  * NOTE: The expectation to style this entire component in one day is likely unrealistic. The recommendation is to implement the required functionality, then systematically begin styling with Mantine. Match the comp image(s) as closely as possible. 80% of the design work will likely take 20% of your time. By the end of the week, being mostly there with style is the goal!
+* Implement the Context API to make some basic application settings available to components
+  * How many To Do Items to show at once.
+  * Whether or not to show completed items.
+  * Hint: if reusing the custom useForm() hook, event validation may be necessary if using any Mantine component other than \<TextInput />
+  
+* Provide the users with a form where they can change the values for those settings.
+  * This should be given in the form of a new component, perhaps linked to from the main navigation.
+  * Hint: Use Browser Router to create the page/route/component for this.
+  * Once settings are updated, render the updated settings to the right of the “form”. Consider using \<Grid />, \<Card />, and \<When /> components.
+
+* Save the users choices in Local Storage.
+
+* Retrieve their preferences from Local Storage and apply them to the application on startup.
 
 ### Technical Requirements/Notes
 
-1. Implement the React context API for defining settings across the entire application.
+1. Extend context provider to include all of the following features:
 
-    * Create React Context for managing application display settings and provide this at the application level.
-    * Add the following defaults to the context provider’s state, they will not be changeable in this lab.
-      * Display three items.
-      * Hide completed items using a boolean.
-      * Define “difficulty” as a default sort word to optionally use in the stretch goal.
+    * Create a context for managing application settings and provide this at the application level.
+    * Display or Hide completed items (boolean)
+    * Number of items to display per screen (number).
+    * Create a function in context that saves user preferences (for the above) to local storage.
+    * Default sort field (string).
+    * Implement a useEffect() (or componentDidMount()) in context to read from local storage and set the values for those 2 state properties on application load.  
 
-2. Consume and utilize context values throughout your components.
+    Note: Need to stringify() state prior to saving to local storage, and parse it when retrieve it.
+
+2. Consume and utilize context values throughout components.
 
     * Show a maximum of three items per screen by default in the \<List /> component.
-    * Use the Mantine \<Pagination /> component to allow users to navigate a list of items.
-    * Hide completed items in the list by default (the ability to show will be added in a later lab).
+        * Properly implement the Mantine \<Pagination /> component functionality to let the users navigate a long list of items with the correct number of tasks showing per “page”.
 
-**Pagination Notes:**
-
-* Only display the first n items in the list, where n is the default number three from your settings context.
-  * If you have more than n items in the list, the \<Pagination /> component will add a button that, when clicked, will replace the list with the next n. items in the list.
-  * the \<Pagination /> component will manage the “previous” and “next” buttons upon correct implementation.
+    * Hide completed items in the list
 
 ## Documentation
 
@@ -144,4 +146,4 @@ Currently, two official plugins are available:
 * App.jsx testing to assert adding, deleting, and completing items
 * Settings.jsx testing to assert context consumed by child components.
 
-### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/1)
+### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/2)
