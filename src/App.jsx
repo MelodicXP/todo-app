@@ -13,9 +13,9 @@ import DisplaySettingsProvider from './Context/Settings';
 export default class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
-        <MantineProvider>
-          <DisplaySettingsProvider>
+    
+        <DisplaySettingsProvider>
+          <MantineProvider>
             <NavLink
               className="nav-link"
               href="#required-for-focus"
@@ -25,9 +25,9 @@ export default class App extends React.Component {
             />
             <Todo />
             <Footer />
-          </DisplaySettingsProvider>
-        </MantineProvider>
-      </React.Fragment>
+          </MantineProvider>
+        </DisplaySettingsProvider>
+      
     );
   }
 }

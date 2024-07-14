@@ -37,15 +37,15 @@ const List = (props) => {
           shadow="sm" 
           padding="lg" 
           radius="md" 
-          withBorder:true
+          withBorder
           mt="md"
         >
 
         <Group justify="space-between" mt="md" mb="xs">
           <Text fw={500}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
+            <p>{item.text}</p>
+            <p><small>Assigned to: {item.assignee}</small></p>
+            <p><small>Difficulty: {item.difficulty}</small></p>
           </Text>
         </Group>
   
