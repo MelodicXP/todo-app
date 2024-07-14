@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Fieldset, TextInput, Switch } from '@mantine/core';
 import useForm from '../../hooks/form';
 import Header from '../Header';
 import List from '../List';
@@ -70,6 +71,17 @@ const Todo = () => {
           toggleComplete={toggleComplete}
           deleteItem={deleteItem}
         />
+
+        <Fieldset component="form" legend="Update Settings">
+          <Switch
+            defaultChecked
+            label="Show Completed ToDos"
+          />
+
+          <TextInput label="Items Per Page" placeholder="enter number" />
+          <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
+        </Fieldset>
+
       </div>
 
     </>
