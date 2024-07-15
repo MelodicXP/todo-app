@@ -10,7 +10,7 @@ import { SettingsContext } from '../../Context/Settings';
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
-  const { hideCompleted, setHideCompleted, displayItems } = useContext(SettingsContext);
+  const { hideCompleted, setHideCompleted, displayItems, setDisplayItems } = useContext(SettingsContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -61,6 +61,11 @@ const Todo = () => {
     setHideCompleted(event.currentTarget.checked);
   };
 
+  // Handler for changing number of items displayed per page
+  const handleNumberInputChange = (value) => {
+    setDisplayItems(value);
+  }
+
   return (
     <>
 
@@ -87,12 +92,14 @@ const Todo = () => {
           />
 
           <NumberInput
-                label="Items Per Page"
-                placeholder="Input Number"
-                defaultValue={displayItems}
-                min={1}
-                max={10}
+            label="Items Per Page"
+            placeholder="Input Number"
+            defaultValue={displayItems}
+            min={1}
+            max={10}
+            onChange={handleNumberInputChange}
           />
+          
           <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
         </Fieldset>
 
