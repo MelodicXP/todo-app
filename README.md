@@ -173,4 +173,4 @@ Currently, two official plugins are available:
 * App.jsx testing to assert adding, deleting, and completing items
 * Settings.jsx testing to assert context consumed by child components.
 
-### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/2)
+### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/5)
