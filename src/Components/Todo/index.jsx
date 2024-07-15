@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Fieldset, TextInput, Switch } from '@mantine/core';
+import { Fieldset, TextInput, Switch, NumberInput } from '@mantine/core';
 import useForm from '../../hooks/form';
 import Header from '../Header';
 import List from '../List';
@@ -10,7 +10,7 @@ import { SettingsContext } from '../../Context/Settings';
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
-  const { hideCompleted, setHideCompleted } = useContext(SettingsContext);
+  const { hideCompleted, setHideCompleted, displayItems } = useContext(SettingsContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -86,7 +86,13 @@ const Todo = () => {
             onChange={handleSwitchChange}
           />
 
-          <TextInput label="Items Per Page" placeholder="enter number" />
+          <NumberInput
+                label="Items Per Page"
+                placeholder="Input Number"
+                defaultValue={displayItems}
+                min={1}
+                max={10}
+          />
           <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
         </Fieldset>
 
