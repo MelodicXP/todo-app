@@ -7,6 +7,7 @@ import App from './App.jsx';
 describe('App', () => {
   afterEach(() => {
     cleanup(); // Ensure the DOM is clean after each test
+    localStorage.clear(); // Clear localStorage after each test
   });
 
   it('should Add Item', () => {
@@ -80,7 +81,7 @@ describe('App', () => {
     expect(listItem).not.toBeInTheDocument();
   });
 
-  it('should hide a complete item', () => {
+  it('should mark item as complete', () => {
     render(<App />);
 
     // Assert input user form renders
@@ -108,7 +109,7 @@ describe('App', () => {
     let completeButton = screen.getByTestId('complete-button');
     fireEvent.click(completeButton);
 
-    // Assert the list item is no longer present
-    expect(listItem).not.toBeInTheDocument();
+    // Assert the list item is marked as complete
+    expect(listItem.textContent).toContain('Complete');
   });
 });
