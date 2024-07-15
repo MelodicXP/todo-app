@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import { Fieldset, TextInput, Switch, NumberInput, Grid, Card, Text, Group, Button } from '@mantine/core';
 import { SettingsContext } from '../../Context/Settings';
+import Header from '../Header';
+import './SettingsForm.scss';
 
 const SettingsForm = () => {
   const { hideCompleted, setHideCompleted, displayItems, setDisplayItems } = useContext(SettingsContext);
@@ -26,55 +28,61 @@ const SettingsForm = () => {
   };
 
   return (
-    <Grid
-      mt="md"
-      ml="md"
-    >
-      <Grid.Col span={4}>
-        <Fieldset component="form" legend="Update Settings" onSubmit={handleSubmit}> 
-          <Switch
-            defaultChecked={hideCompleted}
-            label="Hide Completed ToDos"
-            onChange={handleSwitchChange}
-          />
+    <div className='user-settings'>
 
-          <NumberInput
-            label="Items Per Page"
-            placeholder="Input Number"
-            value={displayItems}
-            min={1}
-            max={10}
-            onChange={handleNumberInputChange}
-          />
+      <Header/>
 
-          <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
+      <Grid
+        mt="md"
+      >
+        <Grid.Col span={6}>
+          <Fieldset component="form" legend="Update Settings" onSubmit={handleSubmit} shadow="sm" padding="lg" radius="md" withBorder> 
+            <Switch
+              defaultChecked={hideCompleted}
+              label="Hide Completed ToDos"
+              onChange={handleSwitchChange}
+              mt="md"
+            />
 
-          <Button 
-            fullWidth 
-            mt="md" 
-            id='show-settings-button' 
-            type="submit" 
-            data-testid="show-settings-button"
-          >
-            Show New Settings
-          </Button>
-        </Fieldset>
-      </Grid.Col>
+            <NumberInput
+              label="Items Per Page"
+              placeholder="Input Number"
+              value={displayItems}
+              min={1}
+              max={10}
+              onChange={handleNumberInputChange}
+              mt="md"
+            />
 
-      {settingsSubmitted && ( // Conditionally render the second Grid.Col
-        <Grid.Col span={4}>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Group justify="space-between" mt="md" mb="xs">
-              <Text fw={500}>Updated Settings</Text>
-            </Group>
-            <Text size="sm">
-              <p>Hide Completed ToDos: {hideCompleted ? 'Yes' : 'No'}</p>
-              <p>Items Per Page: {displayItems}</p>
-            </Text>
-          </Card>
+            <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
+
+            <Button 
+              fullWidth 
+              mt="md" 
+              id='show-settings-button' 
+              type="submit" 
+              data-testid="show-settings-button"
+            >
+              Show New Settings
+            </Button>
+          </Fieldset>
         </Grid.Col>
-      )}
-    </Grid>
+
+        {settingsSubmitted && ( // Conditionally render the second Grid.Col
+          <Grid.Col span={6}>
+            <Card shadow="sm" padding="lg" radius="md" withBorder>
+              <Group justify="space-between" mt="md" mb="xs">
+                <Text fw={500}>Updated Settings</Text>
+              </Group>
+              <Text size="sm">
+                <p>Hide Completed ToDos: {hideCompleted ? 'Yes' : 'No'}</p>
+                <p>Items Per Page: {displayItems}</p>
+              </Text>
+            </Card>
+          </Grid.Col>
+        )}
+      </Grid>
+    </div>
 
 
   );
