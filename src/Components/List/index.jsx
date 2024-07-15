@@ -55,6 +55,7 @@ const List = (props) => {
             onChange={() => toggleComplete(item.id)}
             data-testid="complete-checkbox"
             mt="md"
+            mb="md"
           />
   
         <Button 
