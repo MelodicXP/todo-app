@@ -5,14 +5,23 @@ body {
   // border: 2px solid black;
 }
 
+nav {
+  // border: 3px solid red;
+  display: flex;
+  background-color: #228be6 ;
+}
+
 .nav-link {
   display: flex;
   margin: 0px;
   padding-left: 1rem;
   padding-top: 1rem;
-  padding-bottom: 1rem;  
+  padding-bottom: 1rem; 
+  // border: 3px solid green;
+  width: max-content; 
 }
 
 .mantine-NavLink-label {
   font-size: larger;
 }
+

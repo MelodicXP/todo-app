@@ -1,36 +1,7 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #dee2e6;
-  margin-left: .5rem;
-
-
-  & label {
-    display: flex;
-    flex-direction: column;
-    // border: 1px solid blue;
-    margin-bottom: 1rem;
-    margin-left: 0.5rem;
-    margin-right: .5rem;
-    font-weight: bold;
-  }
-
-  & h2{
-    margin-left: 0.5rem;
-    margin-right: .5rem;
-  }
-}
-
-#add-item-button {
-  background-color: #339af8;
-  color: white;
-  border: none;
-  padding: 0.25rem;
-  width: 45%;
-  &:hover {
-    background-color: #1e7acb; // Darker shade of blue for hover effect
-    cursor: pointer; // Optional: Changes cursor to pointer to indicate it's clickable
-  }
+.mantine-Fieldset-legend {
+  font-weight: bold;
+  font-size: large;
+  margin: auto;
 }
 
 

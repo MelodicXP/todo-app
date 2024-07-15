@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings';
-import { Pagination } from '@mantine/core';
+import { Pagination, Card, Text, Button, Group, Checkbox } from '@mantine/core';
 import './List.scss';
 
 const List = (props) => {
@@ -30,16 +30,49 @@ const List = (props) => {
 
   return (
     <div className='list'>
-      {displayList.map(item => (
-        <div key={item.id} className='list-item' data-testid="list-item">
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)} data-testid="complete-button">Complete: {item.complete.toString()}</div>
-          <button id='delete-button' type="button" onClick={() => deleteItem(item.id)} data-testid="delete-button">Delete</button>
-        </div>
+    {displayList.map(item => (
+        <Card 
+          data-testid="list-item"
+          key={item.id} 
+          shadow="sm" 
+          padding="lg" 
+          radius="md" 
+          withBorder
+          mb="md"
+        >
+
+        <Group justify="space-between" mt="md" mb="xs">
+          <Text fw={500}>
+            <p>{item.text}</p>
+            <p><small>Assigned to: {item.assignee}</small></p>
+            <p><small>Difficulty: {item.difficulty}</small></p>
+          </Text>
+        </Group>
+
+        <Checkbox
+            label="Complete"
+            checked={item.complete}
+            onChange={() => toggleComplete(item.id)}
+            data-testid="complete-checkbox"
+            mt="md"
+            mb="md"
+          />
+  
+        <Button 
+          color="red" 
+          id='delete-button' 
+          type="button" 
+          onClick={() => deleteItem(item.id)} 
+          data-testid="delete-button"
+          mt="md"
+        >
+          Delete
+        </Button>
+      </Card>
       ))}
+
       <Pagination
+        mt="md"
         className='pagination'
         page={activePage}
         onChange={setActivePage}

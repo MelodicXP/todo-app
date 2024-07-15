@@ -8,13 +8,18 @@ import './Todo.scss';
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
-
   const [defaultValues] = useState({
     difficulty: 4,
   });
-  const [list, setList] = useState([]);
+
+  const [list, setList] = useState(() => {
+    // Load list from localStorage if available
+    const savedList = localStorage.getItem('todoList');
+    return savedList ? JSON.parse(savedList) : [];
+  });
+
   const [incomplete, setIncomplete] = useState([]);
-  
+
   // Handles all form input logic
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
@@ -23,12 +28,12 @@ const Todo = () => {
     item.id = uuid();
     item.complete = false;
     console.log(item);
-    setList([...list, item]);
+    setList((prevList) => [...prevList, item]);
   }
 
-  // Delete item and udpate list state
+  // Delete item and update list state
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+    const items = list.filter(item => item.id !== id);
     setList(items);
   }
 
@@ -47,15 +52,12 @@ const Todo = () => {
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
-    // document.title = `To Do List: ${incomplete}`;
-    // linter will want 'incomplete' added to dependency array unnecessarily. 
-    // disable code used to avoid linter warning 
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [list]);  
+    // Save list to localStorage whenever it changes
+    localStorage.setItem('todoList', JSON.stringify(list));
+  }, [list]);
 
   return (
     <>
-
       <Header incomplete={incomplete} />
 
       <div className='form-list-display'>
@@ -71,7 +73,6 @@ const Todo = () => {
           deleteItem={deleteItem}
         />
       </div>
-
     </>
   );
 };
