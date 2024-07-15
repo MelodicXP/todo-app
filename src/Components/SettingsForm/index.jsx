@@ -16,7 +16,7 @@ const SettingsForm = () => {
   };
 
   return (
-    <Fieldset component="form" legend="Update Settings">
+    <Fieldset legend="Update Settings">
       <Switch
         defaultChecked={hideCompleted}
         label="Hide Completed ToDos"
