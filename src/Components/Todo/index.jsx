@@ -86,7 +86,7 @@ const Todo = () => {
 
         <Fieldset component="form" legend="Update Settings">
           <Switch
-            defaultChecked={!hideCompleted}
+            defaultChecked={hideCompleted}
             label="Hide Completed ToDos"
             onChange={handleSwitchChange}
           />
@@ -99,7 +99,7 @@ const Todo = () => {
             max={10}
             onChange={handleNumberInputChange}
           />
-          
+
           <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
         </Fieldset>
 
