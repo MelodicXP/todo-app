@@ -32,12 +32,11 @@ export default class App extends React.Component {
                 variant="filled"
                 active
               />
-
+            </nav>
             <Routes>
               <Route path="/" element={<Todo />} /> {/* Modified: Use element prop */}
               <Route path="/settings" element={<SettingsForm />} /> {/* Modified: Use element prop */}
             </Routes>
-            </nav>
           </Router>
           <Footer />
         </MantineProvider>
