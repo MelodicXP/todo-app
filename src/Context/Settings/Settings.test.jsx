@@ -34,7 +34,7 @@ describe('DisplaySettingsProvider', () => {
 
     // Assert default values
     expect(displayItems.textContent).toBe('3');
-    expect(hideCompleted.textContent).toBe('true');
+    expect(hideCompleted.textContent).toBe('false');
   });
 
   it('should allow updating hideCompleted', () => {
@@ -48,12 +48,12 @@ describe('DisplaySettingsProvider', () => {
     const toggleButton = screen.getByTestId('toggle-hide-completed');
 
     // Assert default value
-    expect(hideCompleted.textContent).toBe('true');
+    expect(hideCompleted.textContent).toBe('false');
 
     // Toggle hideCompleted value
     fireEvent.click(toggleButton);
 
     // Assert updated value
-    expect(hideCompleted.textContent).toBe('false');
+    expect(hideCompleted.textContent).toBe('true');
   });
 });
