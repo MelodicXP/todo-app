@@ -7,12 +7,15 @@ const SettingsForm = () => {
 
   // Handler for switching visibility of completed tasks
   const handleSwitchChange = (event) => {
-    setHideCompleted(event.currentTarget.checked);
+    const newValue = event.currentTarget.checked;
+    setHideCompleted(newValue);
+    localStorage.setItem('hideCompleted', newValue); // Save to localStorage
   };
 
   // Handler for changing number of items displayed per page
   const handleNumberInputChange = (value) => {
     setDisplayItems(value);
+    localStorage.setItem('displayItems', value); // Save to localStorage
   };
 
   return (
@@ -26,7 +29,7 @@ const SettingsForm = () => {
       <NumberInput
         label="Items Per Page"
         placeholder="Input Number"
-        defaultValue={displayItems}
+        value={displayItems}
         min={1}
         max={10}
         onChange={handleNumberInputChange}
