@@ -37,16 +37,24 @@ describe('App', () => {
     fireEvent.click(addItemButton);
     
     // Assert added list item appears on screen
-    let listItem = screen.getByTestId('list-item');
-    let completeButton = screen.getByTestId('complete-button');
-    let completeStatus = 'false';
+    let listItems = screen.getAllByTestId('list-item'); // Get all items
+    expect(listItems.length).toBeGreaterThan(0); // Ensure at least one item is present
+    
+    let completeCheckbox = screen.getAllByTestId('complete-checkbox')[0];
+
+    // Assert the checkbox is not checked initially
+    expect(completeCheckbox).not.toBeChecked();
+
+    // Toggle the checkbox
+    fireEvent.click(completeCheckbox);
 
     // Assert list items contains expected data
-    expect(listItem.textContent).toContain(mockTask);
-    expect(listItem.textContent).toContain(mockAssignedTo);
-    expect(listItem.textContent).toContain(mockDifficulty);
-    expect(completeButton).not.toBeNull();
-    expect(listItem.textContent).toContain(completeStatus);
+    expect(listItems[0].textContent).toContain(mockTask);
+    expect(listItems[0].textContent).toContain(mockAssignedTo);
+    expect(listItems[0].textContent).toContain(mockDifficulty);
+
+    // Assert the checkbox is now checked
+    expect(completeCheckbox).toBeChecked();
   });
 
   it('should delete an item', () => {
@@ -106,10 +114,10 @@ describe('App', () => {
     expect(listItem).toBeInTheDocument();
 
     // Find and click the complete button
-    let completeButton = screen.getByTestId('complete-button');
-    fireEvent.click(completeButton);
+    let completeCheckbox = screen.getByTestId('complete-checkbox');
+    fireEvent.click(completeCheckbox);
 
     // Assert the list item is marked as complete
-    expect(listItem.textContent).toContain('Complete');
+    expect(completeCheckbox).toBeChecked();
   });
 });
