@@ -38,7 +38,7 @@ const List = (props) => {
           padding="lg" 
           radius="md" 
           withBorder
-          mt="md"
+          mb="md"
         >
 
         <Group justify="space-between" mt="md" mb="xs">
