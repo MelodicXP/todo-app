@@ -1,16 +1,14 @@
-import { useEffect, useState, useContext } from 'react';
-import { Fieldset, TextInput, Switch, NumberInput } from '@mantine/core';
+import { useEffect, useState } from 'react';
 import useForm from '../../hooks/form';
 import Header from '../Header';
 import List from '../List';
 import Form from '../Form';
+import SettingsForm from '../SettingsForm';
 import './Todo.scss';
-import { SettingsContext } from '../../Context/Settings';
 
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
-  const { hideCompleted, setHideCompleted, displayItems, setDisplayItems } = useContext(SettingsContext);
 
   const [defaultValues] = useState({
     difficulty: 4,
@@ -56,16 +54,6 @@ const Todo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);  
 
-  // Handler for switching visibility of completed tasks
-  const handleSwitchChange = (event) => {
-    setHideCompleted(event.currentTarget.checked);
-  };
-
-  // Handler for changing number of items displayed per page
-  const handleNumberInputChange = (value) => {
-    setDisplayItems(value);
-  }
-
   return (
     <>
 
@@ -84,24 +72,7 @@ const Todo = () => {
           deleteItem={deleteItem}
         />
 
-        <Fieldset component="form" legend="Update Settings">
-          <Switch
-            defaultChecked={hideCompleted}
-            label="Hide Completed ToDos"
-            onChange={handleSwitchChange}
-          />
-
-          <NumberInput
-            label="Items Per Page"
-            placeholder="Input Number"
-            defaultValue={displayItems}
-            min={1}
-            max={10}
-            onChange={handleNumberInputChange}
-          />
-
-          <TextInput label="Sort Keyword" placeholder="difficulty" mt="md" />
-        </Fieldset>
+        <SettingsForm />
 
       </div>
 
