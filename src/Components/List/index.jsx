@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings';
-import { Pagination, Card, Text, Button, Group } from '@mantine/core';
+import { Pagination, Card, Text, Button, Group, Checkbox } from '@mantine/core';
 import './List.scss';
 
 const List = (props) => {
@@ -48,15 +48,14 @@ const List = (props) => {
             <p><small>Difficulty: {item.difficulty}</small></p>
           </Text>
         </Group>
-  
-        <Text size="sm">
-          <div 
-            onClick={() => toggleComplete(item.id)} 
-            data-testid="complete-button"
-          >
-            Complete: {item.complete.toString()}
-          </div>
-        </Text>
+
+        <Checkbox
+            label="Complete"
+            checked={item.complete}
+            onChange={() => toggleComplete(item.id)}
+            data-testid="complete-checkbox"
+            mt="md"
+          />
   
         <Button 
           color="red" 
