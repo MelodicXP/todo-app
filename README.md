@@ -113,16 +113,37 @@ The useForm hook is a custom hook designed to handle form state management and s
 
 Install
 
+* "@mantine/carousel": "^7.11.1",
+* "@mantine/charts": "^7.11.1",
+* "@mantine/code-highlight": "^7.11.1",
 * "@mantine/core": "^7.11.1",
+* "@mantine/dates": "^7.11.1",
+* "@mantine/dropzone": "^7.11.1",
+* "@mantine/form": "^7.11.1",
 * "@mantine/hooks": "^7.11.1",
+* "@mantine/modals": "^7.11.1",
+* "@mantine/notifications": "^7.11.1",
+* "@mantine/nprogress": "^7.11.1",
+* "@mantine/spotlight": "^7.11.1",
+* "@mantine/tiptap": "^7.11.1",
 * "@tabler/icons-react": "^3.10.0",
+* "@tiptap/extension-link": "^2.4.0",
+* "@tiptap/react": "^2.4.0",
+* "@tiptap/starter-kit": "^2.4.0",
+* "dayjs": "^1.11.11",
+* "embla-carousel-react": "^8.1.6",
 * "react": "^18.3.1",
 * "react-dom": "^18.3.1",
+* "react-router-dom": "^6.24.1",
+* "recharts": "^2.12.7",
 * "sass": "^1.77.6",
 * "uuid": "^10.0.0"
 
 Dev Dependencies
 
+* "@testing-library/jest-dom": "^6.4.6",
+* "@testing-library/react": "^16.0.0",
+* "@testing-library/user-event": "^14.5.2",
 * "@types/react": "^18.3.3",
 * "@types/react-dom": "^18.3.0",
 * "@vitejs/plugin-react": "^4.3.1",
@@ -130,7 +151,13 @@ Dev Dependencies
 * "eslint-plugin-react": "^7.34.2",
 * "eslint-plugin-react-hooks": "^4.6.2",
 * "eslint-plugin-react-refresh": "^0.4.7",
-* "vite": "^5.3.1"
+* "jest": "^29.7.0",
+* "jsdom": "^24.1.0",
+* "postcss": "^8.4.39",
+* "postcss-preset-mantine": "^1.15.0",
+* "postcss-simple-vars": "^7.0.1",
+* "vite": "^5.3.1",
+* "vitest": "^2.0.2"
 
 ### React + Vite
 
