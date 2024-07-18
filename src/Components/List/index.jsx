@@ -51,7 +51,8 @@ const List = (props) => {
           </Text>
         </Group>
 
-        <Checkbox
+        <Auth capability="update">
+          <Checkbox
             label="Complete"
             checked={item.complete}
             onChange={() => toggleComplete(item.id)}
@@ -59,17 +60,20 @@ const List = (props) => {
             mt="md"
             mb="md"
           />
+        </Auth>
   
-        <Button 
-          color="red" 
-          id='delete-button' 
-          type="button" 
-          onClick={() => deleteItem(item.id)} 
-          data-testid="delete-button"
-          mt="md"
-        >
-          Delete
-        </Button>
+        <Auth capability="delete">
+          <Button 
+            color="red" 
+            id='delete-button' 
+            type="button" 
+            onClick={() => deleteItem(item.id)} 
+            data-testid="delete-button"
+            mt="md"
+          >
+            Delete
+          </Button>
+        </Auth>
       </Card>
       ))}
 
