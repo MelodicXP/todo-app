@@ -1,50 +1,66 @@
-import React from 'react';
-import {When} from 'react-if';
-
+import {useState, useContext } from 'react';
+import { When } from 'react-if';
 import { LoginContext } from './context.jsx';
+import { Button, Group } from '@mantine/core';
 
-class Login extends React.Component {
-  static contextType = LoginContext;
+const Login = () => {
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const { loggedIn, login, logout } = useContext(LoginContext);
 
-  constructor(props) {
-    super(props);
-    this.state = { username: '', password: '' };
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  // Handle input change
+  const handleChange = (e) => {
+    setCredentials({...credentials, [e.target.name]: e.target.value });
   };
 
-  handleSubmit = e => {
+  // Handle form submission
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.context.login(this.state.username, this.state.password);
+    login(credentials.username, credentials.password);
   };
 
-  render() {
-    return (
-      <>
-        <When condition={this.context.loggedIn}>
-          <button onClick={this.context.logout}>Log Out</button>
-        </When>
+  return (
+    <>
+      <When condition={loggedIn}>
+        <Group>
+          <Button 
+            onClick={logout}
+            mt="sm"
+            color="red" 
+            id='logout-button' 
+            data-testid="logout-button"
+          >
+            Log Out
+          </Button>
+        </Group>
+      </When>
 
-        <When condition={!this.context.loggedIn}>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              placeholder="UserName"
-              name="username"
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder="password"
-              name="password"
-              onChange={this.handleChange}
-            />
-            <button>Login</button>
-          </form>
-        </When>
-      </>
-    );
-  }
-}
+      <When condition={!loggedIn}>
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="UserName"
+            name="username"
+            onChange={handleChange}
+          />
+          <input
+            placeholder="password"
+            name="password"
+            onChange={handleChange}
+          />
+          <Group>
+            <Button
+              mt="sm"
+              color="#343a40" 
+              id='login-button' 
+              type="submit" 
+              data-testid="login-button"
+            >
+              Login
+            </Button>
+          </Group>
+        </form>
+      </When>
+    </>
+  );
+};
 
 export default Login;
