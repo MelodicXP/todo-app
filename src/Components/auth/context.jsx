@@ -37,7 +37,7 @@ export const LoginContext = React.createContext();
 const LoginProvider = ({ children }) => {
   // State variables to manage login status, user info, and errors
   const [loggedIn, setLoggedIn] = useState(false);
-  const [token, setTokoen] = useState(null);
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
 
@@ -79,7 +79,7 @@ const LoginProvider = ({ children }) => {
   // Function to update login state and save token in cookies
   const setLoginState = (loggedIn, token, user, error) => {
     cookie.save('auth', token);
-    setTokoen(token);
+    setToken(token);
     setLoggedIn(loggedIn);
     setUser(user);
     setError(error || null);
