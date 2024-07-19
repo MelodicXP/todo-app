@@ -6,7 +6,7 @@
 
 ### Problem Domain
 
-To Do List Manager Phase 3: Adding security and access controls to the application.  In this final phase, require that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+**To Do List Manager Phase 3:** Adding security and access controls to the application.  In this final phase, require that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
 
 ### Feature Tasks & Requirements
 
@@ -54,9 +54,9 @@ Extend the functionality of the application by requiring users be logged in to v
 
 ## Documentation
 
-![UML](./assets/UML.png)
-
-![Screenshot](./assets/screenshotLab31.png)
+![UML](./assets/lab33UML.png)
+![Screenshot](./assets/loggedInScreenShot.png)
+![Screenshot](./assets/loggedOutScreenshot.png)
 
 ### Describe how global state is consumed by the components
 
@@ -140,8 +140,11 @@ Install
 * "@tiptap/starter-kit": "^2.4.0",
 * "dayjs": "^1.11.11",
 * "embla-carousel-react": "^8.1.6",
+* "jwt-decode": "^4.0.0",
 * "react": "^18.3.1",
+* "react-cookies": "^0.1.1",
 * "react-dom": "^18.3.1",
+* "react-if": "^4.1.5",
 * "react-router-dom": "^6.24.1",
 * "recharts": "^2.12.7",
 * "sass": "^1.77.6",
@@ -180,5 +183,8 @@ Currently, two official plugins are available:
 
 * App.jsx testing to assert adding, deleting, and completing items
 * Settings.jsx testing to assert context consumed by child components.
+* auth.jsx test to assert RBAC
+* login.jsx test to assert login and logout
+* context.jsx test to assert context consumption
 
-### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/5)
+### Link to Pull Request ---> [Pull Request](https://github.com/MelodicXP/todo-app/pull/7)
