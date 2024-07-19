@@ -5,6 +5,7 @@ import { NavLink } from '@mantine/core';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom'; 
 import Todo from './Components/Todo';
 import Footer from './Components/Footer';
+import Login from './Components/auth/login';
 import SettingsForm from './Components/SettingsForm'; // Import SettingsForm component
 import './App.scss';
 
@@ -32,6 +33,7 @@ export default class App extends React.Component {
                 variant="filled"
                 active
               />
+              <Login />
             </nav>
             <Routes>
               <Route path="/" element={<Todo />} /> {/* Modified: Use element prop */}

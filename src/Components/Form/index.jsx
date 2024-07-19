@@ -1,6 +1,7 @@
 import './Form.scss';
 import { Fieldset, TextInput, Button, Group} from '@mantine/core';
 import { Slider, Text } from '@mantine/core';
+import Auth from '../auth/auth';
 
 const Form = (props) => {
 
@@ -39,7 +40,9 @@ const Form = (props) => {
       />
 
       <Group>
-        <Button fullWidth mt="md" id='add-item-button' type="submit" data-testid="add-item-button">Add Item</Button>
+        <Auth capability="create">
+          <Button fullWidth mt="md" id='add-item-button' type="submit" data-testid="add-item-button">Add Item</Button>
+        </Auth>
       </Group>
 
     </Fieldset>

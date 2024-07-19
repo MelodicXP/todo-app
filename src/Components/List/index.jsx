@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import { Pagination, Card, Text, Button, Group, Checkbox } from '@mantine/core';
 import './List.scss';
+import Auth from '../auth/auth';
 
 const List = (props) => {
   const { list, toggleComplete, deleteItem } = props;
@@ -29,6 +30,7 @@ const List = (props) => {
   const displayList = filteredList.slice(startIndex, startIndex + displayItems);
 
   return (
+    <Auth>
     <div className='list'>
     {displayList.map(item => (
         <Card 
@@ -49,7 +51,8 @@ const List = (props) => {
           </Text>
         </Group>
 
-        <Checkbox
+        <Auth capability="update">
+          <Checkbox
             label="Complete"
             checked={item.complete}
             onChange={() => toggleComplete(item.id)}
@@ -57,17 +60,20 @@ const List = (props) => {
             mt="md"
             mb="md"
           />
+        </Auth>
   
-        <Button 
-          color="red" 
-          id='delete-button' 
-          type="button" 
-          onClick={() => deleteItem(item.id)} 
-          data-testid="delete-button"
-          mt="md"
-        >
-          Delete
-        </Button>
+        <Auth capability="delete">
+          <Button 
+            color="red" 
+            id='delete-button' 
+            type="button" 
+            onClick={() => deleteItem(item.id)} 
+            data-testid="delete-button"
+            mt="md"
+          >
+            Delete
+          </Button>
+        </Auth>
       </Card>
       ))}
 
@@ -79,6 +85,7 @@ const List = (props) => {
         total={Math.ceil(totalItems / displayItems)}
       />
     </div>
+    </Auth>
   );
 }
 
