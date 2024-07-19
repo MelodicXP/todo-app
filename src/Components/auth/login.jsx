@@ -41,18 +41,21 @@ const Login = () => {
           className='login-form'
           bg="blue"
           bd="none"
+          data-testid="login-form"
         >
           <TextInput
             placeholder="UserName"
             name="username"
             onChange={handleChange}
             mr="sm"
+            data-testid="username-login"
           />
 
           <TextInput
             placeholder="password"
             name="password"
             onChange={handleChange}
+            data-testid="password-login"
           />
 
           <Group>
