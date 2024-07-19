@@ -1,7 +1,8 @@
 import {useState, useContext } from 'react';
 import { When } from 'react-if';
 import { LoginContext } from './context.jsx';
-import { Button, Group } from '@mantine/core';
+import { Button, Fieldset, Group, TextInput } from '@mantine/core';
+import './Login.scss';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -21,10 +22,9 @@ const Login = () => {
   return (
     <>
       <When condition={loggedIn}>
-        <Group>
+        <Group className="logout-button">
           <Button 
             onClick={logout}
-            mt="sm"
             color="red" 
             id='logout-button' 
             data-testid="logout-button"
@@ -35,29 +35,38 @@ const Login = () => {
       </When>
 
       <When condition={!loggedIn}>
-        <form onSubmit={handleSubmit}>
-          <input
+        <Fieldset 
+          component="form" 
+          onSubmit={handleSubmit}
+          className='login-form'
+          bg="blue"
+          bd="none"
+        >
+          <TextInput
             placeholder="UserName"
             name="username"
             onChange={handleChange}
+            mr="sm"
           />
-          <input
+
+          <TextInput
             placeholder="password"
             name="password"
             onChange={handleChange}
           />
+
           <Group>
             <Button
-              mt="sm"
               color="#343a40" 
               id='login-button' 
               type="submit" 
               data-testid="login-button"
+              ml="sm"
             >
               Login
             </Button>
           </Group>
-        </form>
+        </Fieldset>
       </When>
     </>
   );
