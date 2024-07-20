@@ -26,7 +26,6 @@ const Todo = () => {
 
   // Add item and update list state
   async function addItem(item) {
-
     try {
       // Prepare item data to send
       const newItem = {
@@ -47,16 +46,25 @@ const Todo = () => {
 
       // Update the state of list with updated list
       setList((prevList) => [...prevList, itemAdded]);
-
     } catch (error) {
       console.error('Error adding item:', error);
     }
   }
 
   // Delete item and update list state
-  function deleteItem(id) {
-    const items = list.filter(item => item.id !== id);
-    setList(items);
+  async function deleteItem(id) {
+    try {
+      // Send DELETE request to API with item id
+      const response = await axios.delete(`${API}/api/v1/todo/${id}`);
+
+      // Log response
+      console.log('delete response: ', response.data);
+
+      // Get updated todo list
+      getTodoList();
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
   }
 
   // Toggle completed status
