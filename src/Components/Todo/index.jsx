@@ -68,14 +68,29 @@ const Todo = () => {
   }
 
   // Toggle completed status
-  function toggleComplete(id) {
-    const items = list.map(item => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-    setList(items);
+  async function toggleComplete(id) {
+    try {
+      // Find the item to be updated
+      const itemToUpdate = list.find(item => item.id === id);
+  
+      // Prepare the updated item data
+      const updatedItem = { ...itemToUpdate, complete: !itemToUpdate.complete };
+  
+      // Send PUT request to the API to update the item
+      const response = await axios.put(`${API}/api/v1/todo/${id}`, updatedItem);
+  
+      // Log response
+      console.log('update response:', response.data);
+  
+      // Update the state of the list with the updated item
+      const updatedList = list.map(item =>
+        item.id === id ? response.data : item
+      );
+  
+      setList(updatedList);
+    } catch (error) {
+      console.error('Error updating item:', error);
+    }
   }
 
   // Get list from live api
