@@ -1,43 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import cookie from 'react-cookies';
-import {jwtDecode} from 'jwt-decode';
-// import { test } from 'vitest';
-
-// Mock user data for testing purpose
-const testUsers = {
-  admin: {
-    password: 'ADMIN',
-    name: 'Administrator',
-    // "capabilities": "['create','read','update','delete']",
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ'
-  },
-  editor: {
-    password: 'EDITOR',
-    name: 'Editor',
-    // "capabilities": "['read','update']",
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWRpdG9yIiwicm9sZSI6ImVkaXRvciIsImNhcGFiaWxpdGllcyI6IlsncmVhZCcsJ3VwZGF0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.3aDn3e2pf_J_1rZig8wj9RiT47Ae2Lw-AM-Nw4Tmy_s'
-  },
-  writer: {
-    password: 'WRITER',
-    name: 'Writer',
-    // "capabilities": "['create']",
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV3JpdGVyIiwicm9sZSI6IndyaXRlciIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.dmKh8m18mgQCCJp2xoh73HSOWprdwID32hZsXogLZ68'
-  },
-  user: {
-    password: 'USER',
-    name: 'User',
-    // "capabilities": "['read']",
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInJvbGUiOiJ1c2VyIiwiY2FwYWJpbGl0aWVzIjoiWydyZWFkJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.WXYvIKLdPz_Mm0XDYSOJo298ftuBqqjTzbRvCpxa9Go'
-  },
-};
+import axios from 'axios';
 
 // Create a context to provide login state and actions
 export const LoginContext = React.createContext();
 
+// Live API url
+const API_URL = import.meta.env.VITE_API;
+
 const LoginProvider = ({ children }) => {
   // State variables to manage login status, user info, and errors
   const [loggedIn, setLoggedIn] = useState(false);
-  const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
 
@@ -48,28 +21,35 @@ const LoginProvider = ({ children }) => {
 
   // Function to handle user login
   const login = async (username, password) => {
-    let auth = testUsers[username];
-
-    if (auth && auth.password === password) {
-      try {
-        validateToken(auth.token);
-      } catch (error) {
-        setLoginState(loggedIn, token, user, error);
-        console.error(error);
+    const request = {
+      method: 'post',
+      baseURL: API_URL,
+      url: './auth/signin',
+      auth: {
+        username: username,
+        password: password
       }
     }
+
+    const response = await axios(request);
+    console.log(response.data);
+
+    validateToken(response.data);
   };
 
   // Function to handle logout
   const logout = () => {
     setLoginState(false, null, {});
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
   // Function to validate JWT token
-  const validateToken = (token) => {
+  const validateToken = (data) => {
     try {
-      let validUser = jwtDecode(token);
-      setLoginState(true, token, validUser);
+      setLoginState(true, data.token, data.user);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
     } catch (error) {
       setLoginState(false, null, {}, error);
       console.log('Token Validation Error', error);
@@ -79,7 +59,6 @@ const LoginProvider = ({ children }) => {
   // Function to update login state and save token in cookies
   const setLoginState = (loggedIn, token, user, error) => {
     cookie.save('auth', token);
-    setToken(token);
     setLoggedIn(loggedIn);
     setUser(user);
     setError(error || null);
@@ -87,10 +66,13 @@ const LoginProvider = ({ children }) => {
 
   // Effect to validate token on component mount
   useEffect(() => {
-    const qs = new URLSearchParams(window.location.search);
-    const cookieToken = cookie.load('auth');
-    const token = qs.get('token') || cookieToken || null;
-    validateToken(token);
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    if (token) {
+      user = JSON.parse(user);
+      let data = { token, user };
+      validateToken(data);
+    }
   }, []);
 
   return (
