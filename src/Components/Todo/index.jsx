@@ -4,20 +4,21 @@ import Header from '../Header';
 import List from '../List';
 import Form from '../Form';
 import './Todo.scss';
+import axios from 'axios';
 
 import { v4 as uuid } from 'uuid';
+
+const API = import.meta.env.VITE_API;
 
 const Todo = () => {
   const [defaultValues] = useState({
     difficulty: 4,
   });
 
-  const [list, setList] = useState(() => {
-    // Load list from localStorage if available
-    const savedList = localStorage.getItem('todoList');
-    return savedList ? JSON.parse(savedList) : [];
-  });
+  // Initial state of list items (todos)
+  const [list, setList] = useState([]);
 
+  // Initial state of incomplete (todos)
   const [incomplete, setIncomplete] = useState([]);
 
   // Handles all form input logic
@@ -47,6 +48,18 @@ const Todo = () => {
     });
     setList(items);
   }
+
+  // Get list from live api
+  async function getTodoList() {
+    const response = await axios.get(`${API}/api/v1/todo`);
+    console.log('response todo list:', response);
+    setList(response.data);
+  }
+
+  // On load get todo list from live api
+  useEffect(() => {
+    getTodoList();
+  }, [])
 
   // Keep an eye on when list is updated and update count of incomplete
   useEffect(() => {
