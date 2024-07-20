@@ -6,7 +6,7 @@ import Form from '../Form';
 import './Todo.scss';
 import axios from 'axios';
 
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 
 const API = import.meta.env.VITE_API;
 
@@ -25,11 +25,32 @@ const Todo = () => {
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   // Add item and update list state
-  function addItem(item) {
-    item.id = uuid();
-    item.complete = false;
-    console.log(item);
-    setList((prevList) => [...prevList, item]);
+  async function addItem(item) {
+
+    try {
+      // Prepare item data to send
+      const newItem = {
+        task: item.text,
+        assignee: item.assignee,
+        difficulty: item.difficulty,
+        complete: false
+      };
+
+      // Post item to API
+      const response = await axios.post(`${API}/api/v1/todo`, newItem);
+
+      // Log response
+      console.log('response:', response.data);
+
+      // Response contains updated list with new items
+      const itemAdded = response.data;
+
+      // Update the state of list with updated list
+      setList((prevList) => [...prevList, itemAdded]);
+
+    } catch (error) {
+      console.error('Error adding item:', error);
+    }
   }
 
   // Delete item and update list state
@@ -52,7 +73,7 @@ const Todo = () => {
   // Get list from live api
   async function getTodoList() {
     const response = await axios.get(`${API}/api/v1/todo`);
-    console.log('response todo list:', response);
+    // console.log('response todo list:', response.data);
     setList(response.data);
   }
 
