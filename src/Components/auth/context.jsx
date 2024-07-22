@@ -20,22 +20,21 @@ const LoginProvider = ({ children }) => {
   };
 
   // Function to handle user login
-  const login = async (username, password) => {
-    const request = {
-      method: 'post',
-      baseURL: API_URL,
-      url: './auth/signin',
-      auth: {
-        username: username,
-        password: password
-      }
+const login = async (username, password) => {
+  const request = {
+    method: 'post',
+    url: `${API_URL}/auth/signin`,
+    auth: {
+      username: username,
+      password: password
     }
+  }
 
-    const response = await axios(request);
-    console.log(response.data);
+  const response = await axios(request);
+  console.log(response.data);
 
-    validateToken(response.data);
-  };
+  validateToken(response.data);
+};
 
   // Function to handle logout
   const logout = () => {
