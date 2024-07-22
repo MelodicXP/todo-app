@@ -1,4 +1,4 @@
-# 401 - Lab 33 - \<Login /> and \<Auth />
+# 401 - Lab 34 - API Integration
 
 ## Project: To-Do App
 
@@ -6,51 +6,43 @@
 
 ### Problem Domain
 
-**To Do List Manager Phase 3:** Adding security and access controls to the application.  In this final phase, require that users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+**To Do List Manager Phase 4:** Require that users be logged in through a live authentication server, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them. All To Do items will be stored in a database, accessed through a deployed API.
 
 ### Feature Tasks & Requirements
 
-Extend the functionality of the application by requiring users be logged in to view items and also restrict access based on user type. The user stories from Phases 1, and 2 remain unchanged. For this phase, we are now adding the following new user stories.
-
-* As a user, I want to provide a way for other users to create new accounts.
-* As a user, I want to provide a way for all users to login to their account.
-* As a user, I want to make sure that my To Do items are only viewable to users that have logged in with a valid account.
-* As a user, I want to ensure that only fellow users that are allowed to “create”, based on their user type, can add new To Do Items.
-* As a user, I want to ensure that only fellow users that are allowed to “update”, based on their user type, can mark To Do Items complete.
-* As a user, I want to ensure that only fellow users that are allowed to “delete”, based on their user type, can delete new To Do Items
+In Phase 4, finalize the functionality of the application by connecting to live servers for login, authorization, and data access.
 
 ### Technical Requirements/Notes
 
-1. Implement a Login/Auth React Context, “protect” the To Do application by restricting access to the various application features based on the users’ login status and capabilities.
+1. Alter the Add, Toggle Complete, and Delete functions within your to do application to use your API instead of in memory state.
 
-    * Define a function that can simulate a login event.
-        * Parameters: username and password as strings.
-        * Sets a User on the auth context, and changes login status to true.
-    * Define a function that can simulate a logout event.
-        * Resets the User object and changes login status to `false.
-    * Define a function that can authorize a User based on a capability.
-        * Parameters: a capability as a string.
-        * Returns a boolean whether the user has the capability parameter.
+    * Fetch the current list of items from the database on application start.
+    * Whenever you add/update/delete an item, refresh the state so the user can instantly see the change.
+        * Consider: Do you re-fetch from the server every time you make a change?
+            * If so, how?
+            * If not, how will you stay in sync?
 
-2. Create an \<Auth /> component with the following features:
+2. Alter the Login Context to use the server to login users instead of our mock users list.
+    * Be sure to store the token in state as well as in a cookie so you can reference it later.
 
-    * Given a capability prop of type string, conditionally render components based on the user stored in context.
-    * Hide the entire interface until the user has logged in.
-    * Implements the following RBAC rules:
-        * Logged In Users with ‘update’ permissions can click the records to mark them as complete.
-        * Logged In Users with ‘create’ permissions can create new items.
-        * Logged In Users with ‘delete’ permissions can delete items.
-        * Logged In Users with ‘read’ permissions can see the list of To Do Items.
+### API Sever
 
-**Note:** since only writers can ‘create’ and add new Todo items to state, in this lab, a person with read only access will not see any Todo items. This will change in the next lab once we populate Todo items from a database on page load.
+* Need a deployed API Server, which implements a todo item data model.
+  * GET /todo: Gets a list of all items.
+  * ‘POST /todo’: Adds an item.
+  * ‘PUT /todo’: Updates an item (use this to mark them as complete).
+  * ‘DELETE /todo/:id’ : Deletes an item.
 
-1. Implement a \<Login /> Component that has the following features:
+### Authentication Server
 
-    * Provide an account login screen with a form.
-        * Accepts Username and Password.
-        * On successful login, store the token as a cookie.
-    * If a user returns and has a valid login cookie, hide the login form and consider them “Logged In”.
-        * Display a logout button instead of a form if they are “Logged In”.
+* Authentication Server
+  * Need a deployed Authenticated API Server, which supports:
+  * Registration (/signup).
+  * Login (/signin).
+  * Authorization (via Bearer Token).
+  * ACL (using user roles).
+  * Ensure creatin of user roles and permissions lists that front-end is expecting to tap into.
+  * To Do data model for storing the actual to do items.
 
 ## Documentation
 
